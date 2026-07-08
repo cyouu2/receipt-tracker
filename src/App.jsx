@@ -5,7 +5,10 @@ import Auth from './components/Auth';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
+import CategoryFolder from './pages/CategoryFolder';
+import ProjectPage from './pages/ProjectPage';
 import ComingSoon from './pages/ComingSoon';
+import Footer from './components/Footer';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -44,14 +47,17 @@ function App() {
       <Navbar email={session.user.email} onMenuClick={() => setSidebarOpen(true)} />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <main className="max-w-2xl mx-auto px-4 pt-20 pb-8">
+      <main className="max-w-3xl mx-auto px-4 pt-20 pb-8">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/category/:categoryId" element={<CategoryFolder />} />
+          <Route path="/category/:categoryId/:projectId" element={<ProjectPage />} />
           <Route path="/dashboard" element={<ComingSoon title="Dashboard" />} />
           <Route path="/explore" element={<ComingSoon title="Explore" />} />
           <Route path="/account" element={<ComingSoon title="Account" />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

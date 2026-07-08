@@ -42,7 +42,7 @@ function Navbar({ email, onMenuClick }) {
             <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         </button>
-        <h1 className="text-lg font-bold text-gray-800">🧾 Receipt Tracker</h1>
+        <h1 className="text-lg font-bold text-gray-800 font-mono">iris archive</h1>
       </div>
       <div className="flex items-center gap-4">
         <span className="text-sm text-gray-500 hidden sm:inline">{email}</span>
