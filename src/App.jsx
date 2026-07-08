@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { supabase } from './lib/supabaseClient';
 import Auth from './components/Auth';
-import UploadReceipt from './components/UploadReceipt';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Home from './pages/Home';
+import ComingSoon from './pages/ComingSoon';
 
 function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -35,18 +40,18 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">
-        Receipt Tracker 🧾
-      </h1>
-      <p className="text-gray-600 mb-4">Logged in as {session.user.email}</p>
-      <button
-        onClick={() => supabase.auth.signOut()}
-        className="bg-gray-800 text-white rounded px-4 py-2 mb-4"
-      >
-        Log Out
-      </button>
-      <UploadReceipt />
+    <div className="min-h-screen bg-gray-50">
+      <Navbar email={session.user.email} onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      <main className="max-w-2xl mx-auto px-4 pt-20 pb-8">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<ComingSoon title="Dashboard" />} />
+          <Route path="/explore" element={<ComingSoon title="Explore" />} />
+          <Route path="/account" element={<ComingSoon title="Account" />} />
+        </Routes>
+      </main>
     </div>
   );
 }
