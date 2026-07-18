@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { categories } from '../data/projects';
 
-function Home() {
+function Projects() {
   return (
     <div>
         <h2 class="text-xl font-bold text-gray-800 mb-2 mt-3">
@@ -27,4 +27,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Projects;

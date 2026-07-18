@@ -4,7 +4,7 @@ import { supabase } from './lib/supabaseClient';
 import Auth from './components/Auth';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import Home from './pages/Home';
+import Projects from './pages/Projects';
 import CategoryFolder from './pages/CategoryFolder';
 import ProjectPage from './pages/ProjectPage';
 import ComingSoon from './pages/ComingSoon';
@@ -49,7 +49,7 @@ function App() {
 
       <main className="max-w-3xl mx-auto px-4 pt-20 pb-8">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Projects />} />
           <Route path="/category/:categoryId" element={<CategoryFolder />} />
           <Route path="/category/:categoryId/:projectId" element={<ProjectPage />} />
           <Route path="/dashboard" element={<ComingSoon title="Dashboard" />} />
