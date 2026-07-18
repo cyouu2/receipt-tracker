@@ -10,7 +10,6 @@ const links = [
 function Sidebar({ open, onClose }) {
   return (
     <>
-      {/* Backdrop, click to close */}
       {open && (
         <div
           className="fixed inset-0 bg-black/30 z-30"
@@ -18,7 +17,6 @@ function Sidebar({ open, onClose }) {
         />
       )}
 
-      {/* Sliding panel */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-40 transform transition-transform duration-200 ${
           open ? 'translate-x-0' : '-translate-x-full'

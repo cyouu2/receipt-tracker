@@ -14,6 +14,7 @@ function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -24,6 +25,9 @@ function App() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
+        if (session) {
+          setShowAuth(false);
+        }
       }
     );
 
@@ -38,13 +42,29 @@ function App() {
     );
   }
 
-  if (!session) {
-    return <Auth />;
+  if (!session && showAuth) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <div className="p-4">
+          <button 
+            onClick={() => setShowAuth(false)}
+            className="text-sm font-medium text-gray-600 hover:text-gray-900"
+          >
+            &larr; Back to Home
+          </button>
+        </div>
+        <Auth />
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar email={session.user.email} onMenuClick={() => setSidebarOpen(true)} />
+      <Navbar 
+        email={session?.user?.email} 
+        onMenuClick={() => setSidebarOpen(true)} 
+        onLoginClick={() => setShowAuth(true)} 
+      />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <main className="max-w-3xl mx-auto px-4 pt-20 pb-8">

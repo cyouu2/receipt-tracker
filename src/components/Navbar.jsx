@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
-function Navbar({ email, onMenuClick }) {
+function Navbar({ email, onMenuClick, onLoginClick }) {
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
 
@@ -10,7 +10,6 @@ function Navbar({ email, onMenuClick }) {
       const currentY = window.scrollY;
       const scrollingDown = currentY > lastScrollY.current;
 
-      // Only hide after scrolling down a bit, avoids jitter near the top
       if (scrollingDown && currentY > 80) {
         setVisible(false);
       } else {
@@ -35,7 +34,6 @@ function Navbar({ email, onMenuClick }) {
           aria-label="Toggle menu"
           className="text-gray-700 hover:bg-gray-100 rounded p-1.5"
         >
-          {/* Hamburger icon, plain SVG, no extra library needed */}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="12" x2="21" y2="12" />
@@ -44,14 +42,26 @@ function Navbar({ email, onMenuClick }) {
         </button>
         <h1 className="text-lg font-bold text-gray-800 font-mono">iris archive</h1>
       </div>
+      
       <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-500 hidden sm:inline">{email}</span>
-        <button
-          onClick={() => supabase.auth.signOut()}
-          className="text-sm bg-gray-800 text-white rounded px-3 py-1.5 font-medium hover:bg-gray-700"
-        >
-          Log Out
-        </button>
+        {email ? (
+          <>
+            <span className="text-sm text-gray-500 hidden sm:inline">{email}</span>
+            <button
+              onClick={() => supabase.auth.signOut()}
+              className="text-sm bg-gray-800 text-white rounded px-3 py-1.5 font-medium hover:bg-gray-700"
+            >
+              Log Out
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={onLoginClick}
+            className="text-sm bg-gray-800 text-white rounded px-3 py-1.5 font-medium hover:bg-gray-700"
+          >
+            Log In
+          </button>
+        )}
       </div>
     </nav>
   );
