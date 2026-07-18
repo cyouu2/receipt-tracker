@@ -3,6 +3,7 @@ export const categories = [
   { id: 'ml', name: 'AI / ML', icon: '🤖', description: 'model training & experimentation' },
   { id: 'chatbot', name: 'Chatbot', icon: '💬', description: 'conversational interfaces' },
   { id: 'data', name: 'Data', icon: '📊', description: 'dashboards & analysis' },
+  { id: 'game', name: 'Games', icon: '🎮', description: 'for the fun of it' },
 ];
 
 export const projects = [

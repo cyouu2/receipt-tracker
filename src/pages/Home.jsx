@@ -8,7 +8,7 @@ function Home() {
             <span class="mr-3">Welcome to</span>
             <span class="font-mono">iris archive</span>
         </h2>
-      <p className="text-gray-500 mb-9">a collection of my mini projects, because i didn't save my school projects...</p>
+      <p className="text-gray-500 mb-8">a collection of my mini projects, because i didn't save my school projects...</p>
 
       <div className="grid grid-cols-2 gap-4">
         {categories.map((cat) => (
